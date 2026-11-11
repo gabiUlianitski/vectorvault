@@ -1,0 +1,23 @@
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Local test databases & cached matrices
+*.db
+*.sqlite
+*.sqlite3
+*.npy
+.vectorvault/
+
+# Environment variables & IDE files
+.env
+.vscode/
+.idea/

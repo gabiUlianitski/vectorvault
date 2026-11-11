@@ -1,0 +1,8 @@
+{
+  "version_id": "002",
+  "description": "Upgrade local database from old MiniLM-L6 to new paraphrase-MiniLM-L3 model architecture",
+  "source_model": "all-MiniLM-L6-v2",
+  "target_model": "paraphrase-MiniLM-L3-v2",
+  "source_dimensions": 384,
+  "target_dimensions": 384
+}

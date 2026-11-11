@@ -1,0 +1,23 @@
+You are building VectorVault, an open-source, enterprise-grade vector migration and schema version-control framework for AI Data Operations (DataOps).
+The tool acts as the "Flyway/Liquibase for AI Vectors," providing deterministic lineage logs, schema circuit breakers, and algorithmic dimension mapping.
+
+## Tech Stack & Architectural Principles:
+- Language: Python 3.11+ using strict type annotations and Pydantic v2 for configuration schemas.
+- High-Performance Math: Use `numpy` and `scipy` for core linear algebra (Projections, PCA, Matrix transformations).
+- Database Interacting Layer: Design clean, decoupled repository abstractions using protocols. The reference implementation must support `psycopg3` for PostgreSQL `pgvector` compatibility.
+- Zero Cloud Dependencies: Do not build hard couplings to heavy cloud embedding frameworks. Implement abstract interfaces or injectables for embedding engines (`openai`, `ollama`, or local models).
+- Clean Staging: Isolate internal migration metadata logs into a deterministic system tracking table (`vector_vault_changelog`) to isolate it entirely from standard application collection schemas.
+
+## Structural File Layout Conventions:
+Enforce the following codebase segregation across directory contexts:
+- `vectorvault/cli.py`          -> Command Line Interface parsing migration directions (`init`, `generate`, `migrate`, `status`).
+- `vectorvault/models.py`       -> Pydantic schema validation for Changelog States, Migration Scripts, and Vector Layouts.
+- `vectorvault/changelog.py`    -> SQL operations managing the `vector_vault_changelog` tracking state table (transactional DDL/DML isolation).
+- `vectorvault/engine.py`       -> High-performance mathematical linear projection layers converting vector space dimensions.
+- `vectorvault/gateway.py`      -> The Circuit Breaker proxy preventing data schema/dimension mismatch crashes during runtime runtime.
+- `tests/`                      -> Test suites using `pytest` running mock ETL scenarios and vector migration traces.
+
+## Behavioral Guardrails & Patterns:
+- Immutability first: When mathematically shifting vector matrices, never overwrite row payloads in place without first validating transactional rollbacks or fallback verification logs.
+- Strict Shape Enforcement: Every mathematical projection operator must structurally assert and validate bounds dimensions (e.g., matching source `1536` dimensions perfectly to target `768` dimensions). Throw transparent data schema anomalies upon error.
+- Standard Logging: Log all operational events clearly (avoid silent string fallbacks or empty trace exceptions).
