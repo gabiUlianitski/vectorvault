@@ -3,10 +3,10 @@ requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "vectorvault"
+name = "vectorvault-engine"
 version = "0.1.0"
 authors = [
-    { name = "Your Name", email = "your.email@example.com" }
+    { name = "Gabi Ulianitski", email = "gabi@example.com" }
 ]
 description = "VectorVault: A database migration and schema version-control framework for AI vectors (The Liquibase/Flyway for vector dimensions)."
 readme = "README.md"
@@ -33,7 +33,7 @@ dev = ["pytest>=7.0.0"]
 
 # Bundled dependency grouping
 all = [
-    "vectorvault[postgres,dev]"
+    "vectorvault-engine[postgres,dev]"
 ]
 
 [project.scripts]
