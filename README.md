@@ -76,9 +76,7 @@ Define your embedding model upgrades inside a standard JSON migration configurat
   "version_id": "002",
   "description": "Upgrade from OpenAI text-embedding-3-small to local Llama3-Embedding",
   "source_model": "text-embedding-3-small",
-  "target_model": "llama3-embedding",
-  "source_dimensions": 1536,
-  "target_dimensions": 768
+  "target_model": "llama3-embedding"
 }
 ```
 

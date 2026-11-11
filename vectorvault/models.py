@@ -6,14 +6,14 @@ class MigrationScript(BaseModel):
     description: Optional[str] = Field(None, description="Detailed text tracking the purpose of the migration")
     source_model: str = Field(..., min_length=1)
     target_model: str = Field(..., min_length=1)
-    source_dimensions: int = Field(..., gt=0)
-    target_dimensions: int = Field(..., gt=0)
+    source_dimensions: Optional[int] = Field(None, gt=0, description="Auto-detected at runtime if omitted")
+    target_dimensions: Optional[int] = Field(None, gt=0, description="Auto-detected at runtime if omitted")
 
     @field_validator('target_dimensions')
     @classmethod
-    def validate_dimension_shift(cls, v: int, info) -> int:
-        # Data integrity check: throwing a transparent anomaly layout on invalid validation parameters
-        if 'source_dimensions' in info.data and v == info.data['source_dimensions']:
-            # While valid, typically a migration signifies a structural alteration or model optimization
-            pass
+    def validate_dimension_shift(cls, v: Optional[int], info) -> Optional[int]:
+        # Only run check if both optional dimension overrides were explicitly provided
+        if v is not None and info.data.get('source_dimensions') is not None:
+            if v == info.data['source_dimensions']:
+                pass
         return v
